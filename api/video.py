@@ -52,7 +52,11 @@ def stream_video(id: int, db = Depends(get_db)):
                     break
                 yield chunk
 
-    return StreamingResponse(generate(), media_type="video/mp4")
+    headers = {
+            "Content-Type": "video/mp4"
+        }
+
+    return StreamingResponse(generate(), media_type="video/mp4", headers=headers)
 
 # async def stream_video(id: int, db = Depends(get_db)):
 #     # replace with your own logic for getting the video file
